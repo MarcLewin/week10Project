@@ -1,17 +1,11 @@
 require("dotenv").config();
 var keys = require("./keys.js");
-
-
-
-
-  var request = require('request')
+var request = require('request')
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify(keys.spotify);
-  var client = new Twitter(keys.twitter);
-
-//var movie = "";
+var client = new Twitter(keys.twitter);
 
 var action = process.argv[2];
 var item3 = process.argv;
@@ -20,13 +14,11 @@ var totalInput = "";
 // var movie= process.argv[2];
 //only works after "npm install request" command is entered
 // in the same directory as this file in the terminal
-// if (item3 === " " && action === "movie-this") {
-//   item3 += "Mr. Nobody"
-// }
 
 
-for(var i =3; i<item3.length;  i++ ){
-totalInput= totalInput + " " + item3[i];
+
+for (var i = 3; i < item3.length; i++) {
+  totalInput = totalInput + " " + item3[i];
 }
 //console.log(totalInput)
 
@@ -34,8 +26,16 @@ totalInput= totalInput + " " + item3[i];
 //.split then .join
 
 
+var split = totalInput.split(" ")
+ if (item3[3] === '' && action === "movie-this") {
+   split += "Mr. Nobody"
+ }
+//  console.log(item3[3])
+// console.log(split)
+
+
 function movieCall() {
-  request("http://www.omdbapi.com/?t=" + "mr." +"+nobody" + "&apikey=trilogy&", function (error, response, body) {
+  request("http://www.omdbapi.com/?t=" + split + "&apikey=trilogy&", function (error, response, body) {
 
     if (!error && response.statusCode === 200) {
       //in case you need to view the body
