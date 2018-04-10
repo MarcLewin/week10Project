@@ -55,20 +55,10 @@ function movieCall() {
   });
 }
 
-//start twitter calls!!!!!!!!!!!!!!!!!!!
-// TWITTER_CONSUMER_KEY=wS6EUkLuUrKQljRbw7eyhzd32
-// TWITTER_CONSUMER_SECRET=Ln98b9fbzhxmsaOkhtXpFPzi5SUglRuhtOB0t2SJqtnwk0mpJx
-// TWITTER_ACCESS_TOKEN_KEY=260717376-POOf9tjvTKfFHV3yrLdrXKhJe31xvCMsHvbTjb8A
-// TWITTER_ACCESS_TOKEN_SECRET=IHXFBn9a7PMbPGvyMvhMAysRGWc7vnb11JGHQ8Dl4LRTY
 
 
 
-// var client = new Twitter({
-//   consumer_key: 'wS6EUkLuUrKQljRbw7eyhzd32',
-//   consumer_secret: 'Ln98b9fbzhxmsaOkhtXpFPzi5SUglRuhtOB0t2SJqtnwk0mpJx',
-//   access_token_key: '260717376-POOf9tjvTKfFHV3yrLdrXKhJe31xvCMsHvbTjb8A',
-//   access_token_secret: 'IHXFBn9a7PMbPGvyMvhMAysRGWc7vnb11JGHQ8Dl4LRTY'
-// });
+
 function twitterCall() {
   var params = { screen_name: 'borzo6699' };
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
@@ -87,10 +77,6 @@ function twitterCall() {
 //start spotify
 //"%20"to add empy spaces ina string  + does not work
 
-// var spotify = new Spotify({
-//   id: "88fc858dfea84f33b264f33ad3d44d13",
-//   secret: "891100a230b849c590bb90ba90c387f0"
-// });
 function spotifyCall() {
   spotify.search({ type: 'track', query: totalInput }, function (err, data) {
     if (err) {
