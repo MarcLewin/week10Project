@@ -27,9 +27,10 @@ for (var i = 3; i < item3.length; i++) {
 
 
 var split = totalInput.split(" ")
- if (item3[3] === '' && action === "movie-this") {
-   split += "Mr. Nobody"
- }
+if (item3[3] === undefined && action === "movie-this") {
+
+  split.push( "Mr. Nobody")
+}
 //  console.log(item3[3])
 // console.log(split)
 
