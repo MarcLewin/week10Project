@@ -3,6 +3,7 @@ var keys = require("./keys.js");
 var request = require('request')
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
+var fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
@@ -29,10 +30,16 @@ for (var i = 3; i < item3.length; i++) {
 var split = totalInput.split(" ")
 if (item3[3] === undefined && action === "movie-this") {
 
-  split.push( "Mr. Nobody")
+  split.push("Mr. Nobody")
 }
 //  console.log(item3[3])
 // console.log(split)
+
+var logTxt = action + split;
+//console.log(logTxt)
+fs.writeFile("random.txt", logTxt, function (err) {
+  if (err) throw err;
+});
 
 
 function movieCall() {
@@ -55,9 +62,6 @@ function movieCall() {
 
   });
 }
-
-
-
 
 
 function twitterCall() {
@@ -92,6 +96,13 @@ function spotifyCall() {
   });
 }
 
+function doWhatItSays(){
+
+  fs.readFile("random.txt", "utf8", function(error, data) {
+
+    console.log(data);
+  });
+}
 
 // The switch-case will direct which function gets run.
 switch (action) {
@@ -105,5 +116,9 @@ switch (action) {
 
   case "spotify-this-song":
     spotifyCall();
+    break;
+
+    case "do-what-it-says":
+    doWhatItSays();
     break;
 }
