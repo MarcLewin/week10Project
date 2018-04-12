@@ -82,8 +82,14 @@ function twitterCall() {
 //start spotify
 //"%20"to add empy spaces ina string  + does not work
 
+var split = totalInput.split(" ")
+if (item3[3] === undefined && action === "spotify-this-song") {
+
+  split.push("the%20sign")
+}
+
 function spotifyCall() {
-  spotify.search({ type: 'track', query: totalInput }, function (err, data) {
+  spotify.search({ type: 'track', query: split }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
