@@ -31,16 +31,10 @@ var split = totalInput.split(" ")
 if (item3[3] === undefined && action === "movie-this") {
 
   split.push("Mr. Nobody")
+  //console.log(split)
 }
-//  console.log(item3[3])
-// console.log(split)
-
-var logTxt = action + split;
-//console.log(logTxt)
-fs.writeFile("random.txt", logTxt, function (err) {
-  if (err) throw err;
-});
-
+  //console.log(item3[3])
+ //console.log(split)
 
 function movieCall() {
   request("http://www.omdbapi.com/?t=" + split + "&apikey=trilogy&", function (error, response, body) {
@@ -63,6 +57,11 @@ function movieCall() {
   });
 }
 
+var logTxt = action + split;
+//console.log(logTxt)
+fs.writeFile("random.txt", logTxt, function (err) {
+  if (err) throw err;
+});
 
 function twitterCall() {
   var params = { screen_name: 'borzo6699' };
@@ -82,17 +81,17 @@ function twitterCall() {
 //start spotify
 //"%20"to add empy spaces ina string  + does not work
 
-var split = totalInput.split(" ")
+
 if (item3[3] === undefined && action === "spotify-this-song") {
 
   split.push("the%20sign")
-}
+};
 
 function spotifyCall() {
   spotify.search({ type: 'track', query: split }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
-    }
+    };
 
     console.log("Artist(s): " + data.tracks.items[0].artists[0].name);
     console.log("Title: " + data.tracks.items[0].name);
