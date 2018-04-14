@@ -52,16 +52,15 @@ function movieCall() {
       console.log("Actors: " + (JSON.parse(body).Actors)) //* Actors in the movie.
 
     }
-
-
   });
-}
 
-var logTxt = action + split;
+  var logTxt = action + split;
 //console.log(logTxt)
 fs.writeFile("random.txt", logTxt, function (err) {
   if (err) throw err;
 });
+}
+
 
 function twitterCall() {
   var params = { screen_name: 'borzo6699' };
@@ -76,6 +75,11 @@ function twitterCall() {
     }
 
   });
+  var logTxt = action + split;
+//console.log(logTxt)
+fs.writeFile("random.txt", logTxt, function (err) {
+  if (err) throw err;
+});
 };
 
 //start spotify
@@ -84,10 +88,11 @@ function twitterCall() {
 
 if (item3[3] === undefined && action === "spotify-this-song") {
 
-  split.push("the%20sign")
+  split.push("The%20Sign%20Ace%20of%20Base")
+  //console.log(split)
 };
 
-function spotifyCall() {
+function spotifyCall() {    //split needs to be after query like:    query: split for it to work on the regular  function call
   spotify.search({ type: 'track', query: split }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
@@ -99,15 +104,82 @@ function spotifyCall() {
     console.log("Album: " + data.tracks.items[0].album.name);
 
   });
+  var logTxt = action + split;
+  //console.log(logTxt)
+  fs.writeFile("random.txt", logTxt, function (err) {
+    if (err) throw err;
+  });
 }
+
+
+// *********************** Do-What-It-Says **************************
+// Read random.txt file and use the data to perform an action 
+// function doIt() {
+//   fs.readFile("random.txt", "utf8", function (err, data) {
+//       if (err) {
+//           var logDoIt = ("\n************************** Do-What-It-Says *****************************\nThere was a problem reading the random.txt file. Please try again.\n********************************************************************************");
+//           return console.log(logDoIt);
+//           fs.appendFile("log.txt", logDoIt, function (err) {
+//               if (err) {
+//                   return console.log("do-what-it-says data was not appended to the log.txt file.");
+//               };
+//           });
+//       };
+
+//       var output = data.split(",");
+//       action = output[0];
+//       process.argv[3] = output[1];
+//       title = process.argv[3];
+
+//       if (action === 'spotify-this-song') {
+//           spotifyTitle();
+//       };
+//   });
+
 
 function doWhatItSays(){
 
   fs.readFile("random.txt", "utf8", function(error, data) {
 
-    console.log(data);
+    //console.log(data);
+    var output = data.split(",");
+      action = output[0];
+      process.argv[3] = output[1];
+      split = process.argv[3];
+      //console.log(action)
+
+      if (action === 'spotify-this-song') {
+          spotifyCall();
+          var logTxt = action + split;
+          //console.log(logTxt)
+          fs.writeFile("random.txt", logTxt, function (err) {
+            if (err) throw err;
+          });
+      }
+      if(action === 'movie-this'){
+        movieCall();
+        var logTxt = action + split;
+        //console.log(logTxt)
+        fs.writeFile("random.txt", logTxt, function (err) {
+          if (err) throw err;
+        });
+      }
+      if(action === 'my-tweets'){
+        twitterCall();
+        var logTxt = action + split;
+        //console.log(logTxt)
+        fs.writeFile("random.txt", logTxt, function (err) {
+          if (err) throw err;
+        });
+      }
   });
 }
+
+// var logTxt = action + split;
+// //console.log(logTxt)
+// fs.writeFile("random.txt", logTxt, function (err) {
+//   if (err) throw err;
+// });
 
 // The switch-case will direct which function gets run.
 switch (action) {
